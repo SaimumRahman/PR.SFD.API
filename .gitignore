@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/JM.Application/bin/Debug/net8.0
+/JM.Application/obj
+/JM.AuthServer.API/bin/Debug/net8.0
+/JM.AuthServer.API/obj
+/JM.Domain/bin/Debug/net8.0
+/JM.Domain/obj
+/JM.FSCD.API/bin/Debug/net8.0
+/JM.FSCD.API/obj
+/JM.Persistence/bin/Debug/net8.0
+/JM.Persistence/obj
