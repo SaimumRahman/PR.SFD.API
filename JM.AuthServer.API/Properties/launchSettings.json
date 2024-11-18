@@ -3,10 +3,11 @@
     "JM.AuthServer.API": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:1000;http://localhost:1002"
+      "applicationUrl": "https://localhost:1000;http://localhost:1001"
     }
   }
 }

@@ -19,6 +19,9 @@ using JM.Middleware.Middleware;
 using JM.Application.Repositories.R_Common;
 using JM.Application.Interfaces.I_Common;
 using JM.Application.Common.Generic;
+using AuthenticationServer.API;
+using JM.Application.Interfaces.I_Config;
+using JM.Application.Repositories.R_Config;
 
 
 namespace JM.JM.Application
@@ -28,16 +31,16 @@ namespace JM.JM.Application
         public static IServiceCollection AddJMService(this IServiceCollection services, AppSettings appSettings)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddScoped<IConnectionFactory, ConnectionFactory>(s => new ConnectionFactory(appSettings));
             services.AddSingleton<ILogger, Logger<ErrorDetails>>();
             services.AddScoped<IUnitOfWorkJM, UnitOfWorkJM>();
             services.AddScoped<IBaseDapperRepository, BaseDapperRepository>();
             services.AddScoped<ICommonLibRepository, CommonLibRepository>();
-           
-            #region PR
-           
+
+
+            #region Configurations
+            services.AddScoped<IPropertySetting, PropertySettingRepo>();
             #endregion
 
             services.AddScoped<IUserIdentityService, UserIdentityService>();

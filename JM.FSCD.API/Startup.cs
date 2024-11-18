@@ -49,9 +49,6 @@ namespace JM.ParkingAPI
             services.AddSingleton(appSettings);
             services.AddSingleton(authConfig);
             services.AddJMService(appSettings);
-            //services.AddHRPersistence(appSettings);
-
-           // services.AddCorePersistence(appSettings);
            
             services.AddControllers().AddJsonOptions(options =>
             {
@@ -142,7 +139,7 @@ namespace JM.ParkingAPI
                 app.UseDeveloperExceptionPage();
             }
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JM.Parking_v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JM.FSCD_V_1"));
 
             app.UseErrorLogging();
             app.UseHttpsRedirection();
@@ -151,6 +148,7 @@ namespace JM.ParkingAPI
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseDeveloperExceptionPage();
 
 
             app.UseCors("CorsPolicy");

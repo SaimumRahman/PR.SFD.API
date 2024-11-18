@@ -43,11 +43,9 @@ namespace JM.Application.Services.Common_S
     public class CommonDeleteCommandHandler : IRequestHandler<CommonDeleteCommand, ResponseResult>
     {
         private readonly IUnitOfWorkJM _unitOfWork;
-        private readonly IMapper _mapper;
-        public CommonDeleteCommandHandler(IUnitOfWorkJM unitOfWork, IMapper mapper)
+        public CommonDeleteCommandHandler(IUnitOfWorkJM unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
         public async Task<ResponseResult> Handle(CommonDeleteCommand request, CancellationToken cancellationToken)
         {

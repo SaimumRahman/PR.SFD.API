@@ -77,8 +77,8 @@ namespace JM.AuthServer.API.Controllers
                     UserName = registerRequest.Username,
                     Email = registerRequest.Email,
                     PhoneNumber = registerRequest.PhoneNumber,
-                    PhoneNumberConfirmed = 1,
-                    EmailConfirmed = 1,
+                    PhoneNumberConfirmed = true,
+                    EmailConfirmed = true,
 
                 };
                 IdentityResult result;

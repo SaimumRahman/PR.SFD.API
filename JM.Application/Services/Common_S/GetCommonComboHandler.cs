@@ -24,11 +24,9 @@ namespace JM.Application.Services.Common_S
     public class GetCommonComboHandlerQuery : IRequestHandler<GetCommonComboQuery, IEnumerable<CommonComboDto>>
     {
         private readonly IUnitOfWorkJM _unitOfWork;
-        private readonly IMapper _mapper;
-        public GetCommonComboHandlerQuery(IUnitOfWorkJM unitOfWork, IMapper mapper)
+        public GetCommonComboHandlerQuery(IUnitOfWorkJM unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _mapper = mapper;
         }
         public async Task<IEnumerable<CommonComboDto>> Handle(GetCommonComboQuery request, CancellationToken cancellationToken)
         {

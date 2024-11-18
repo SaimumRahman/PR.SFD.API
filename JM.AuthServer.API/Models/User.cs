@@ -8,22 +8,21 @@ using System.Threading.Tasks;
 namespace JM.AuthServer.API.Models
 {
     [Table("AspNetUsers")]
-    public class User : IdentityUser<Guid>
+    public class User : IdentityUser
     {
-        public int Id { get; set; }
-        public string UserName { get; set; }
-        public string NormalizedUserName { get; set; }
-        public string Email { get; set; }
-        public int EmailConfirmed { get; set; }
-        public string PasswordHash { get; set; }
-        public string SecurityStamp { get; set; }
-        public string ConcurrencyStamp { get; set; }
-        public string PhoneNumber { get; set; } 
-        public int PhoneNumberConfirmed { get; set; }
-        public int TwoFactorEnabled { get; set; }
-        public DateTime LockoutEnd { get; set; }
-        public int LockoutEnabled { get; set; }
-        public int AccessFailedCount { get; set; }
-
+        public new int Id { get; set; }
+        public override string UserName { get; set; }
+        public override string NormalizedUserName { get; set; }
+        public override string Email { get; set; }
+        public override bool EmailConfirmed { get; set; }
+        public override string PasswordHash { get; set; }
+        public override string SecurityStamp { get; set; }
+        public override string ConcurrencyStamp { get; set; }
+        public override string PhoneNumber { get; set; }
+        public override bool PhoneNumberConfirmed { get; set; }
+        public override bool TwoFactorEnabled { get; set; }
+        public override DateTimeOffset? LockoutEnd { get; set; }
+        public override bool LockoutEnabled { get; set; }
+        public override int AccessFailedCount { get; set; }
     }
 }

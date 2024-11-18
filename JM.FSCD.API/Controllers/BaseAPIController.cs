@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-namespace JM.MFSAPI.Controllers
+namespace JM.FSCD.API.Controllers
 {
     
     [EnableCors("CorsPolicy")]

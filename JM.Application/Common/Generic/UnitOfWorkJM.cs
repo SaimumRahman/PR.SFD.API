@@ -4,17 +4,19 @@ using System;
 using System.Collections;
 using JM.Middleware.Http;
 using JM.Application.Interfaces.I_Common;
+using JM.Application.Interfaces.I_Config;
 
 namespace JM.Application.Common.Generic
 {
     public class UnitOfWorkJM : IUnitOfWorkJM
     {
 
-        public UnitOfWorkJM(IBaseDapperRepository baseDapper, IUserIdentityService userIdentityService, ICommonLibRepository common)
+        public UnitOfWorkJM(IBaseDapperRepository baseDapper, IUserIdentityService userIdentityService, ICommonLibRepository common, IPropertySetting propertySetting)
         {
             dapperRepo = baseDapper;
             UserIdentityService = userIdentityService;
             Common = common;
+            PropertySetting= propertySetting;
         }
 
         public IUserIdentityService UserIdentityService { get; }
@@ -22,7 +24,13 @@ namespace JM.Application.Common.Generic
         public ICommonLibRepository Common { get; }
         public IConnectionFactory _conn { get; }
         public IBaseDapperRepository dapperRepo { get; }
-      
+
+        #region Configurations
+
+        public IPropertySetting PropertySetting { get; }
+
+        #endregion
+
         private Hashtable _repositories;
      
 

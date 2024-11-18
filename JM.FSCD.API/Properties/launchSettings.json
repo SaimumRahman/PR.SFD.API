@@ -1,14 +1,13 @@
 {
   "profiles": {
-    "JM.AuthServer.API": {
+    "JM.FSCD.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:2000;http://localhost:2001",
-      "sslPort": 54829
+      "applicationUrl": "https://localhost:2000;http://localhost:2001"
     }
   }
 }

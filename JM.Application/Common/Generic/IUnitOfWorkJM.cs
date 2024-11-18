@@ -4,6 +4,7 @@ using JM.Application.Interfaces.I_Common;
 using JM.Infrastructure.Base;
 using System;
 using System.Threading.Tasks;
+using JM.Application.Interfaces.I_Config;
 
 
 
@@ -17,6 +18,11 @@ namespace JM.Application.Common.Generic
 
 
         public ICommonLibRepository Common { get; }
+
+        #region Configurations
+
+        public IPropertySetting PropertySetting { get; }
+        #endregion
 
         void BeginTransaction();
 
