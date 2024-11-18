@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JM.AuthServer.API.Models
 {
-    [Table("AspNetUsers")]
+    [Table("core_users")]
     public class User : IdentityUser
     {
         public new int Id { get; set; }
