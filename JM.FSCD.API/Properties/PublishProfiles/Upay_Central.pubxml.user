@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\Publish\upay</_PublishTargetUrl>
+    <History>True|2024-08-21T14:50:58.4199765Z||;True|2024-08-21T20:44:06.0850636+06:00||;True|2024-07-23T20:01:10.5396421+06:00||;True|2024-07-23T19:57:54.9027986+06:00||;True|2024-07-23T02:30:14.1083094+06:00||;True|2024-07-23T02:22:04.7622914+06:00||;True|2024-07-23T02:20:29.6399673+06:00||;True|2024-07-23T01:59:34.6497077+06:00||;True|2024-07-23T01:48:16.8895217+06:00||;True|2024-07-23T01:31:09.9981663+06:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

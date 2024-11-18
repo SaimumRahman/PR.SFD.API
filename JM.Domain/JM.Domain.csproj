@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Commands\**" />
+    <Compile Remove="PTOs\**" />
+    <EmbeddedResource Remove="Commands\**" />
+    <EmbeddedResource Remove="PTOs\**" />
+    <None Remove="Commands\**" />
+    <None Remove="PTOs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="JM.Infrastructure">
+      <HintPath>..\DLLS\JM.Infrastructure.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

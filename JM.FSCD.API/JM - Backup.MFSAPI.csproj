@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+    <PackageReference Include="Dapper" Version="2.0.151" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.1" />
+    <PackageReference Include="MySql.Data" Version="8.3.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.130" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JM.Application\JM.Application.csproj" />
+    <ProjectReference Include="..\JM.Domain\JM.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="JM.Infrastructure">
+      <HintPath>..\DLLS\JM.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="JM.Middleware">
+      <HintPath>..\DLLS\JM.Middleware.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\IISProfile.pubxml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties credentials_1json__JsonSchema="https://json.schemastore.org/Credentials.json" /></VisualStudio></ProjectExtensions>
+
+</Project>
