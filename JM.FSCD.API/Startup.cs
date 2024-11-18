@@ -42,7 +42,7 @@ namespace JM.ParkingAPI
 
             services.Configure<AppSettings>(appSettingsSection);
             var appSettings = appSettingsSection.Get<AppSettings>();
-            appSettings.ConnectionString = Configuration.GetConnectionString("JMConnection");
+            appSettings.ConnectionString = Configuration.GetConnectionString("CoreConnection");
             var authConfig = new AuthenticationConfiguration();
             Configuration.Bind("Authentication", authConfig);
       

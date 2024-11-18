@@ -24,7 +24,7 @@ namespace JM.Application.Repositories.R_Config
         {
             try
             {
-                string sql = $@" insert into PropertySetting (SettingName,IsChecked,Property_A)";
+                string sql = $@" insert into PropertySetting (SettingName,IsChecked,Property_A) values (@SettingName,@IsChecked,@Property_A)";
                 var obj = await base.ExecuteIdentityAsync(sql, propertySetting);
 
                 return obj;
