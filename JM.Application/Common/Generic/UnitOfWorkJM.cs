@@ -5,23 +5,28 @@ using System.Collections;
 using JM.Middleware.Http;
 using JM.Application.Interfaces.I_Common;
 using JM.Application.Interfaces.I_Config;
+using JM.Application.Interfaces;
+using System.Threading.Tasks;
 
 namespace JM.Application.Common.Generic
 {
     public class UnitOfWorkJM : IUnitOfWorkJM
     {
 
-        public UnitOfWorkJM(IBaseDapperRepository baseDapper, IUserIdentityService userIdentityService, ICommonLibRepository common, IPropertySetting propertySetting)
+        public UnitOfWorkJM(IDbContextCore dbContex, IBaseDapperRepository baseDapper, IUserIdentityService userIdentityService, ICommonLibRepository common, IPropertySetting propertySetting, IBankRepository bankRepository)
         {
+            _dbContex = dbContex;
             dapperRepo = baseDapper;
             UserIdentityService = userIdentityService;
             Common = common;
             PropertySetting= propertySetting;
+            BankRepository = bankRepository;
         }
 
         public IUserIdentityService UserIdentityService { get; }
-
+        public IDbContextCore _dbContex { get; }
         public ICommonLibRepository Common { get; }
+        public IBankRepository BankRepository { get; }
         public IConnectionFactory _conn { get; }
         public IBaseDapperRepository dapperRepo { get; }
 
@@ -65,7 +70,7 @@ namespace JM.Application.Common.Generic
         {
             if (disposing)
             {
-                //_dbContext.Dispose();
+                _dbContex.Dispose();
             }
         }
 
@@ -82,6 +87,10 @@ namespace JM.Application.Common.Generic
         public void Rollback()
         {
             dapperRepo.Rollback();
+        }
+        public Task<int> SaveChangesAsync()
+        {
+            return _dbContex.SaveChangesAsync();
         }
     }
 }

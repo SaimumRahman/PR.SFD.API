@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using JM.Middleware.Models;
 using JM.Middleware.Converters;
 using JM.Middleware.Middleware;
+using JM.JM.Persistence;
 
 
 namespace JM.ParkingAPI
@@ -49,7 +50,8 @@ namespace JM.ParkingAPI
             services.AddSingleton(appSettings);
             services.AddSingleton(authConfig);
             services.AddJMService(appSettings);
-           
+            services.AddJMPersistence(appSettings);
+
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;

@@ -22,6 +22,8 @@ using JM.Application.Common.Generic;
 using AuthenticationServer.API;
 using JM.Application.Interfaces.I_Config;
 using JM.Application.Repositories.R_Config;
+using JM.Application.Interfaces;
+using JM.Application.Repositories;
 
 
 namespace JM.JM.Application
@@ -41,6 +43,7 @@ namespace JM.JM.Application
 
             #region Configurations
             services.AddScoped<IPropertySetting, PropertySettingRepo>();
+            services.AddScoped<IBankRepository, BankRepository>();
             #endregion
 
             services.AddScoped<IUserIdentityService, UserIdentityService>();

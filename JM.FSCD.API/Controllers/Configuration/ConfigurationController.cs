@@ -1,4 +1,5 @@
-﻿using JM.Application.Services.Common_S;
+﻿using JM.Application.Services;
+using JM.Application.Services.Common_S;
 using JM.Application.Services.Config_S;
 using JM.Domain.CommonDTO;
 using JM.Infrastructure.Models;
@@ -15,7 +16,7 @@ namespace JM.FSCD.API.Controllers.Configuration
     {
 
         [HttpPost("insertnew")]
-        public async Task<ResponseResult> Creates([FromBody] CreatePropertySettingCommand command)
+        public async Task<ResponseResult> Creates([FromBody] CreateBankCommand command)
         {
             return await Mediator.Send(command);
         }
