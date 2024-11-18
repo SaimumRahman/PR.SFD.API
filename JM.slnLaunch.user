@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "JM.AuthServer.API\\JM.AuthServer.API.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -28,27 +28,19 @@ namespace JM.AuthServer.API.Services.Authenticators
             RefreshToken refreshTokenDTO = new RefreshToken()
             {
                Token = refreshToken,
-                UserId = user.UserId
+                UserId = user.Id
             };
              await _refreshTokenRepository.CreaterRefreshToken(refreshTokenDTO);
             bool a ;
-            if (user.IsFirstLogin==1)
-            {
-                a= true;
-            }
-            else
-            {
-                a=false;
-            }
+           
             return new AuthenticatedUserResponse()
             {
                 Token = accessToken.Value,
                 ExpireDate = accessToken.ExpirationTime,
                 RefreshToken = refreshToken,
-                UserId = user.UserId,
+                UserId = user.Id,
                 Username = user.UserName,
-                Id = user.Id.ToString(),
-                IsFirstLogin = a,
+                Id = user.Id.ToString()
               //Roles = await _refreshTokenRepository.GetRolesByUserId(user.UserId)
 
 

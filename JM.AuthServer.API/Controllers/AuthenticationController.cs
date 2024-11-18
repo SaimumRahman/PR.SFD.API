@@ -53,67 +53,57 @@ namespace JM.AuthServer.API.Controllers
             }
             try
             {
-                var exUser = await _userRepositoryRaw.IsUserExists(registerRequest.Username, registerRequest.Email, registerRequest.PhoneNumber);
+                var exUser = await _userRepository.FindByNameAsync(registerRequest.Username);
+                //if (exUser == null)
+                //{
+                //    exUser = await _userRepository.FindByEmailAsync(registerRequest.Email);
+                //    if (exUser == null)
+                //    {
+                //        exUser = await _userRepository.F(registerRequest.Email);
+
+                //    }
+                //}
+
+
 
                 if (registerRequest.Password != registerRequest.ConfirmPassword)
                 {
+
                     return BadRequest(new ResponseResult("Password does not matched with confirm password."));
                 }
 
                 User registrationUser = new()
                 {
-                    Email = registerRequest.Email,
                     UserName = registerRequest.Username,
-                    LockoutEnd = new DateTimeOffset(),
-                    IsFirstLogin = 1,
-                    IsActive = 1,
+                    Email = registerRequest.Email,
                     PhoneNumber = registerRequest.PhoneNumber,
-                    PhoneNumberConfirmed = false,
-                    EmailConfirmed = false,
-                    FullName = registerRequest.FullName,
-                    DesignationId = registerRequest.DesignationId,
-                    DepartmentId = registerRequest.DepartmentId,
-                    //UserID = registerRequest.UserID,
-                    CreateBy = registerRequest.CreateBy,
-                    UpdateBy = registerRequest.UpdateBy,
-                    LandingPage = registerRequest.LandingPage,
-                    ThemeId = registerRequest.ThemeId,
-                    LastLoginDate = DateTime.Now,
-                    CreateDate = DateTime.Now,
-                    IsExpired = 0
+                    PhoneNumberConfirmed = 1,
+                    EmailConfirmed = 1,
 
                 };
                 IdentityResult result;
                 if (exUser == null)
                 {
-                    registrationUser.IsFirstLogin = 0;
+                    result = await _userRepository.CreateAsync(registrationUser, registerRequest.Password);
 
-                    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(registerRequest.Password, 14);
-                    int results = await _userRepositoryRaw.CreateUser(registrationUser, hashedPassword);
-
-                    //else
-                    //{
-                    //    result = await _userRepository.UpdateAsync(registrationUser);
-
-                    //}
-                    if (results != 1)
+                    if (!result.Succeeded)
                     {
-                        //IdentityErrorDescriber errorDescriber = new IdentityErrorDescriber();
-                        //IdentityError primaryError = result.Errors.FirstOrDefault();
+                        IdentityErrorDescriber errorDescriber = new IdentityErrorDescriber();
+                        IdentityError primaryError = result.Errors.FirstOrDefault();
 
-                        //if (primaryError.Code == nameof(errorDescriber.DuplicateEmail))
-                        //{
-                        //    return Conflict(new ResponseResult("Email is already exists."));
-                        //}
-                        //else if (primaryError.Code == nameof(errorDescriber.DuplicateUserName))
-                        //{
-                        //    return Conflict(new ResponseResult("User Name is already exists."));
-                        //}
-                        //else
-                        //{
-                        //    return Conflict(new ResponseResult(result.Errors));
+                        if (primaryError.Code == nameof(errorDescriber.DuplicateEmail))
+                        {
+                            return Conflict(new ResponseResult("Email is already exists."));
+                        }
+                        else if (primaryError.Code == nameof(errorDescriber.DuplicateUserName))
+                        {
+                            return Conflict(new ResponseResult("User Name is already exists."));
+                        }
+                        else
+                        {
+                            return Conflict(new ResponseResult(result.Errors));
 
-                        //}
+                        }
                     }
                     else
                     {
@@ -123,6 +113,8 @@ namespace JM.AuthServer.API.Controllers
                     }
                 }
                 return Conflict(new ResponseResult("User is already exists."));
+
+
             }
             catch (Exception ex)
             {
@@ -130,6 +122,7 @@ namespace JM.AuthServer.API.Controllers
                 return BadRequest(new ResponseResult(ex.Message, false));
 
             }
+
 
         }
 
@@ -143,40 +136,25 @@ namespace JM.AuthServer.API.Controllers
                     return BadRequestModelState();
                 }
 
-                User user = await _userRepositoryRaw.LoginUser(loginRequest.LoginId);
-
-                // User user = await _userRepository.GetTwoFactorEnabledAsync();
+                User user = await _userRepository.FindByNameAsync(loginRequest.LoginId);
 
 
-                //if (user == null)
-                //{
-                //    user = await _userRepository.FindByEmailAsync(loginRequest.LoginId);
-                //    //if (user == null)
-                //    //    return Unauthorized();
-                //}
-                //if (user == null)
-                //{
-                //    user = _userRepository.Users.Where(s => s.PhoneNumber == loginRequest.LoginId).FirstOrDefault();
-                //    if (user == null)
-                //        return Unauthorized();
-                //}
-                //var passwordHasher = new PasswordHasher<User>();
-                //var passwordVerificationResult = passwordHasher.VerifyHashedPassword(user, user.PASSWORDHASH, loginRequest.Password);
-
-               
-                if (user != null)
+                if (user == null)
                 {
-
-                   var result = BCrypt.Net.BCrypt.Verify(loginRequest.Password, user.PASSWORDHASH);
-                    
-                    if (result == false)
-                    {
+                    user = await _userRepository.FindByEmailAsync(loginRequest.LoginId);
+                }
+                if (user == null)
+                {
+                    user = _userRepository.Users.Where(s => s.PhoneNumber == loginRequest.LoginId).FirstOrDefault();
+                    if (user == null)
                         return Unauthorized();
-                    }
                 }
 
-                //bool isCorrectPassword = await _userRepository.CheckPasswordAsync(user, loginRequest.Password);
-               
+                bool isCorrectPassword = await _userRepository.CheckPasswordAsync(user, loginRequest.Password);
+                if (!isCorrectPassword)
+                {
+                    return Unauthorized();
+                }
 
                 var response = await _authenticator.Authenticate(user);
 

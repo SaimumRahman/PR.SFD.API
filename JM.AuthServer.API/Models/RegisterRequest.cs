@@ -13,8 +13,6 @@ namespace JM.AuthServer.API.Models
         public string Email { get; set; } 
 
         [Required]
-        public string FullName { get; set; }
-        [Required]
         public string Username { get; set; }
 
         [Required]
@@ -27,15 +25,7 @@ namespace JM.AuthServer.API.Models
         [Required]
         public string ConfirmPassword { get; set; }
 
-        //public string UserID { get; set; }
-
-        public int DesignationId { get; set; } = 0;
-        public int DepartmentId { get; set; } = 0;
-        public int UpdateBy { get; set; }
-        public int CreateBy { get; set; }
-        public int IsActive { get; set; } 
-        public int ThemeId { get; set; } = 0;
-        public string LandingPage { get; set; } = "";
+      
 
 
     }

@@ -27,7 +27,6 @@ namespace JM.AuthServer.API.Services.TokenGenerators
             {
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Name, user.UserName),
-                new Claim("UserFullName", user.FullName.ToString()),
                 new Claim("MobileNo", user.PhoneNumber.ToString()),
                 new Claim("EmailAddress", user.Email.ToString()),
                 //new Claim(ClaimTypes.Role,"Admin"),

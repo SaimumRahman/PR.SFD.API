@@ -70,7 +70,7 @@ namespace AuthenticationServer.API
             services.AddSingleton(authenticationConfiguration);
 
             string connectionString = _configuration.GetConnectionString("CoreConnection");
-            services.AddDbContext<AuthenticationDbContext>(o => o.UseOracle(connectionString));
+            services.AddDbContext<AuthenticationDbContext>(o => o.UseMySql(connectionString, MariaDbServerVersion.LatestSupportedServerVersion));
 
             services.AddSingleton<AccessTokenGenerator>();
             services.AddSingleton<RefreshTokenGenerator>();
@@ -105,7 +105,7 @@ namespace AuthenticationServer.API
             }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
             {
                 options.ClaimsIssuer = authenticationConfiguration.Issuer;
-                
+
                 options.Cookie.Name = "Token";
                 //options.LoginPath = "/Home/login";
 
@@ -113,7 +113,7 @@ namespace AuthenticationServer.API
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JM.Auth.Server v1", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AbxERP.Auth.Server v1", Version = "v1" });
 
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
